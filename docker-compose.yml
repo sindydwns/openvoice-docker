@@ -4,3 +4,10 @@ services:
       context: openvoice
       dockerfile: Dockerfile
     command: sleep infinity
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
