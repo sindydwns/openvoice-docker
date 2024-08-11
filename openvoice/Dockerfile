@@ -1,4 +1,6 @@
-FROM ubuntu:latest
+FROM nvidia/cuda:12.5.1-cudnn-devel-ubuntu20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update -y
 RUN apt install git sudo curl -y
@@ -9,7 +11,7 @@ RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc; \
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 RUN apt install gcc -y
 RUN apt install make -y
-RUN apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
+RUN apt install build-essential libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev curl git \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
 RUN /root/.pyenv/bin/pyenv install 3.9.19
