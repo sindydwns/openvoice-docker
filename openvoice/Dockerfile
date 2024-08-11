@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.5.1-cudnn-devel-ubuntu20.04
+FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 
