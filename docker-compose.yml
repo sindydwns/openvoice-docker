@@ -1,0 +1,6 @@
+services:
+  openvoice:
+    build:
+      context: openvoice
+      dockerfile: Dockerfile
+    command: sleep infinity
