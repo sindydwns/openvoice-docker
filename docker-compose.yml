@@ -3,6 +3,9 @@ services:
     build:
       context: openvoice
       dockerfile: Dockerfile
+    ports:
+      - 8877:8877
+      - 8888:8888
     deploy:
       resources:
         reservations:

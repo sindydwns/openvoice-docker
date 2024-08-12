@@ -24,6 +24,7 @@ WORKDIR /app/OpenVoice
 RUN /root/.pyenv/versions/3.9.19/bin/pip install setuptools
 RUN /root/.pyenv/versions/3.9.19/bin/pip install -r requirements.txt
 RUN /root/.pyenv/versions/3.9.19/bin/pip install -e .
+RUN apt install jupyter -y
 
 RUN apt install unzip wget -y
 RUN wget https://myshell-public-repo-host.s3.amazonaws.com/openvoice/checkpoints_v2_0417.zip \
