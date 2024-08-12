@@ -3,7 +3,6 @@ services:
     build:
       context: openvoice
       dockerfile: Dockerfile
-    command: sleep infinity
     deploy:
       resources:
         reservations:
