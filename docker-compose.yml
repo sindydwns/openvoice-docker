@@ -3,9 +3,11 @@ services:
     build:
       context: openvoice
       dockerfile: Dockerfile
+    volumes:
+      - huggingface:/root/.cache/huggingface/hub
+      - ./openvoice-repo:/app/openvoice-repo
     ports:
-      - 8877:8877
-      - 8888:8888
+      - "8888:8888"
     deploy:
       resources:
         reservations:
@@ -13,3 +15,11 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+
+volumes:
+  huggingface:
+    # name: repo
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /mnt/c/openvoice-docker/openvoice-repo

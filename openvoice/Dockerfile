@@ -18,18 +18,22 @@ RUN /root/.pyenv/bin/pyenv install 3.9.19
 RUN /root/.pyenv/bin/pyenv global 3.9.19
 
 WORKDIR /app
-RUN git clone https://github.com/myshell-ai/OpenVoice
+COPY install.sh .
 
-WORKDIR /app/OpenVoice
+RUN /root/.pyenv/versions/3.9.19/bin/pip install ipykernel
+RUN apt install jupyter -y
+RUN /root/.pyenv/versions/3.9.19/bin/python -m ipykernel install --user --name=project
+
+RUN apt install unzip wget ffmpeg -y
+RUN /root/.pyenv/versions/3.9.19/bin/pip install git+https://github.com/myshell-ai/MeloTTS.git
+RUN /root/.pyenv/versions/3.9.19/bin/python -m unidic download
+
+RUN chmod +x install.sh && /bin/sh install.sh
 RUN /root/.pyenv/versions/3.9.19/bin/pip install setuptools
 RUN /root/.pyenv/versions/3.9.19/bin/pip install -r requirements.txt
 RUN /root/.pyenv/versions/3.9.19/bin/pip install -e .
-RUN apt install jupyter -y
 
-RUN apt install unzip wget -y
-RUN wget https://myshell-public-repo-host.s3.amazonaws.com/openvoice/checkpoints_v2_0417.zip \
-    && unzip checkpoints_v2_0417.zip \
-    && rm checkpoints_v2_0417.zip
-
+WORKDIR /app/openvoice-repo
 RUN apt install dumb-init -y
+
 CMD ["/usr/bin/dumb-init", "--", "sleep", "infinity"]
