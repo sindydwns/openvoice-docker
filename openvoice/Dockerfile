@@ -32,4 +32,4 @@ RUN wget https://myshell-public-repo-host.s3.amazonaws.com/openvoice/checkpoints
     && rm checkpoints_v2_0417.zip
 
 RUN apt install dumb-init -y
-RUN ["/usr/bin/dumb-init", "--", "sleep", "infinity"]
+CMD ["/usr/bin/dumb-init", "--", "sleep", "infinity"]
