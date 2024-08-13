@@ -1,10 +1,15 @@
 import os
 import torch
-import openvoice.se_extractor as se_extractor
-from openvoice.api import ToneColorConverter
-from faster_whisper import WhisperModel
 import nltk
+import sys
 from melo.api import TTS
+from openvoice.api import ToneColorConverter
+import openvoice.se_extractor as se_extractor
+from faster_whisper import WhisperModel
+
+if __name__ == "__main__":
+    reference_speaker = sys.argv[1]
+    output_file = sys.argv[2]
 
 ckpt_converter = 'checkpoints_v2/converter'
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -13,7 +18,6 @@ output_dir = 'outputs_v2'
 tone_color_converter = ToneColorConverter(f'{ckpt_converter}/config.json', device=device)
 tone_color_converter.load_ckpt(f'{ckpt_converter}/checkpoint.pth')
 
-reference_speaker = 'resources/example_reference.mp3' # This is the voice you want to clone
 se_extractor.model = WhisperModel("medium", device="cpu", compute_type="float32")
 target_se, audio_name = se_extractor.get_se(reference_speaker, tone_color_converter, vad=False)
 
@@ -42,7 +46,6 @@ for language, text in texts.items():
         
         source_se = torch.load(f'checkpoints_v2/base_speakers/ses/{speaker_key}.pth', map_location=device)
         model.tts_to_file(text, speaker_id, src_path, speed=speed)
-        save_path = f'{output_dir}/output_v2_{speaker_key}.wav'
 
         # Run the tone color converter
         encode_message = "@MyShell"
@@ -50,5 +53,5 @@ for language, text in texts.items():
             audio_src_path=src_path, 
             src_se=source_se, 
             tgt_se=target_se, 
-            output_path=save_path,
+            output_path=output_file,
             message=encode_message)
