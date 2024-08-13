@@ -7,3 +7,7 @@
     만약 Failed to initialize NVML 에러가 발생하면 다음을 시도
     - vi /etc/nvidia-container-runtime/config.toml
     - no-cgroups 주석처리
+
+make run
+make exec
+../install.sh
