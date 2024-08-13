@@ -1,3 +1,10 @@
+.ipynb_checkpoints/
+checkpoints_v2/
+MyShell_OpenVoice.egg-info/
+openvoice/
+outputs_v2/
+resources/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
