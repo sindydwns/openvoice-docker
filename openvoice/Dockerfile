@@ -22,6 +22,7 @@ RUN /root/.pyenv/versions/3.9.19/bin/python -m unidic download
 RUN wget https://myshell-public-repo-host.s3.amazonaws.com/openvoice/checkpoints_v2_0417.zip
 RUN git clone https://github.com/myshell-ai/OpenVoice.git
 RUN /root/.pyenv/versions/3.9.19/bin/pip  install -r OpenVoice/requirements.txt
+RUN /root/.pyenv/versions/3.9.19/bin/pip  install botocore==1.34.88 cached_path==1.6.2
 
 COPY install.sh .
 RUN chmod +x install.sh && /bin/sh install.sh
