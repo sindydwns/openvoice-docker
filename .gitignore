@@ -5,6 +5,16 @@ openvoice/
 outputs_v2/
 resources/
 
+openvoice-repo/LICENSE
+openvoice-repo/README.md
+openvoice-repo/demo_part1.ipynb
+openvoice-repo/demo_part2.ipynb
+openvoice-repo/demo_part3.ipynb
+openvoice-repo/docs/QA.md
+openvoice-repo/docs/USAGE.md
+openvoice-repo/requirements.txt
+openvoice-repo/setup.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
