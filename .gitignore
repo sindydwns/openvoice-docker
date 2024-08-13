@@ -5,6 +5,7 @@ openvoice/
 outputs_v2/
 resources/
 processed/
+voice/
 
 openvoice-repo/LICENSE
 openvoice-repo/README.md
