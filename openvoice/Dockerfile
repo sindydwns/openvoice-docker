@@ -19,6 +19,9 @@ RUN /root/.pyenv/versions/3.9.19/bin/pip install ipykernel setuptools
 RUN /root/.pyenv/versions/3.9.19/bin/python -m ipykernel install --user --name=project
 RUN /root/.pyenv/versions/3.9.19/bin/pip install git+https://github.com/myshell-ai/MeloTTS.git
 RUN /root/.pyenv/versions/3.9.19/bin/python -m unidic download
+RUN wget https://myshell-public-repo-host.s3.amazonaws.com/openvoice/checkpoints_v2_0417.zip
+RUN git clone https://github.com/myshell-ai/OpenVoice.git
+RUN /root/.pyenv/versions/3.9.19/bin/pip  install -r OpenVoice/requirements.txt
 
 COPY install.sh .
 RUN chmod +x install.sh && /bin/sh install.sh
