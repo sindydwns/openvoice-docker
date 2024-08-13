@@ -5,9 +5,11 @@ services:
       dockerfile: Dockerfile
     volumes:
       - huggingface:/root/.cache/huggingface/hub
+      - nltk_data:/root/nltk_data
       - ./openvoice-repo:/app/openvoice-repo
     ports:
-      - "8888:8888"
+      - "8888:8888" # for jupyter
+      - "7860:7860" # for gradio
     deploy:
       resources:
         reservations:
