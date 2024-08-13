@@ -4,6 +4,7 @@ MyShell_OpenVoice.egg-info/
 openvoice/
 outputs_v2/
 resources/
+processed/
 
 openvoice-repo/LICENSE
 openvoice-repo/README.md
