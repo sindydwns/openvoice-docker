@@ -7,6 +7,10 @@
     만약 Failed to initialize NVML 에러가 발생하면 다음을 시도
     - vi /etc/nvidia-container-runtime/config.toml
     - no-cgroups 주석처리
+    만약 runtime을 제대로 찾지 못한다면 다음을 시도
+    - echo 'export PATH=/usr/local/cuda-12.1/bin:$PATH' >> ~/.bashrc
+    - echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+    - source ~/.bashrc
 
 make run
 make exec
