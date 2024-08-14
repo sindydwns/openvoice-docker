@@ -1,7 +1,7 @@
 import facade
 
-speaker_path = "resources/sample.mp3"
-speaker_se_path = "voice/sample.pth"
+speaker_path = "resources/example_reference.mp3"
+speaker_se_path = "voice/example_reference.pth"
 base_speaker_se_path = "checkpoints_v2/base_speakers/ses/kr.pth"
 text = "안녕하세요! 오늘은 날씨가 정말 좋네요."
 src_output_path = "outputs_v2/src_output.wav"
