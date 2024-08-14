@@ -26,6 +26,7 @@ RUN /root/.pyenv/versions/3.9.19/bin/pip  install botocore==1.34.88 cached_path=
 
 COPY install.sh .
 RUN chmod +x install.sh && /bin/sh install.sh
+ENV GRADIO_SERVER_NAME="0.0.0.0"
 
 WORKDIR /app/openvoice-repo
 
