@@ -3,7 +3,7 @@ FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update -y
-RUN apt install git sudo curl gcc make unzip wget ffmpeg jupyter dumb-init -y
+RUN apt install git vim sudo curl gcc make unzip wget ffmpeg jupyter dumb-init -y
 RUN apt install build-essential libssl-dev zlib1g-dev libncurses5-dev \
     libbz2-dev libreadline-dev libsqlite3-dev curl git \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
