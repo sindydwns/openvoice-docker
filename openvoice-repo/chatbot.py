@@ -37,13 +37,31 @@ class RecommendChatbot():
         return ""
 
 from langchain.chains.summarize import load_summarize_chain
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemplate
+from langchain.chains import LLMChain
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
 
 class SummarizeChatbot():
     def __init__(self, content):
         load_dotenv()
-        text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=3000, chunk_overlap=300)
-        self.docs = text_splitter.create_documents([content])
+        chat_model = ChatOpenAI(temperature=0, model_name = 'gpt-4o-mini')
+        chat_prompt = ChatPromptTemplate.from_messages([
+            SystemMessagePromptTemplate.from_template(f"{content}의 내용과 관련된 이야기만 반응해."),
+            HumanMessagePromptTemplate.from_template("{history}"),
+            HumanMessagePromptTemplate.from_template("{input}")
+        ])
+
+        self.chat_conversation_chain = ConversationChain(
+            llm=chat_model,
+            prompt=chat_prompt,
+            memory=memory
+        )
         
+        
+        self.text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=3000, chunk_overlap=300)
+        self.docs = self.text_splitter.create_documents([content])
         
         map_prompt_template = '''
             너는 라이브 커머스 방송 매니저야
@@ -60,4 +78,8 @@ class SummarizeChatbot():
         self.chain = load_summarize_chain(chat_model, chain_type="map_reduce", return_intermediate_steps=True,
                                     map_prompt=MAP_PROMPT, combine_prompt=COMBINE_PROMPT)
     def pred(self, chat):
-        return self.chain({"input_documents": self.docs}, return_only_outputs=True)["output_text"]
+        if chat == "":
+            print("empty case: ")
+            return self.chain({"input_documents": self.docs}, return_only_outputs=True)["output_text"]
+        else:
+            return self.chat_conversation_chain.predict(input=chat)
