@@ -48,7 +48,7 @@ class Model():
 
 
     def tts(self, text: str, output_path: str):
-        self.model.tts_to_file(text, self.speaker_id, output_path)
+        self.model.tts_to_file(text, self.speaker_id, output_path, speed=1.4)
 
 
     def tone_color(self, src_path: str, output_path: str):
