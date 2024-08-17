@@ -11,7 +11,7 @@ class RecommendChatbot():
         print(content)
         chat_model = ChatOpenAI(temperature=0, model_name = 'gpt-4o-mini')
         chat_prompt = ChatPromptTemplate.from_messages([
-            SystemMessagePromptTemplate.from_template(f"다음 CONTENT 내용과 관련된 질문에만 대답해.\n\nCONTENT:\n{content}"),
+            SystemMessagePromptTemplate.from_template(f"다음 content 내용과 관련된 질문에만 대답해.\n\ncontent:\n{content}"),
             HumanMessagePromptTemplate.from_template("{history}"),
             HumanMessagePromptTemplate.from_template("{input}")
         ])
@@ -37,7 +37,7 @@ class SummarizeChatbot():
         load_dotenv()
         chat_model = ChatOpenAI(temperature=0, model_name = 'gpt-4o-mini')
         chat_prompt = ChatPromptTemplate.from_messages([
-            SystemMessagePromptTemplate.from_template(f"다음 CONTENT 내용과 관련된 질문에만 대답해.\n\nCONTENT:\n{content}"),
+            SystemMessagePromptTemplate.from_template(f"다음 content 내용과 관련된 질문에만 대답해.\n\ncontent:\n{content}"),
             HumanMessagePromptTemplate.from_template("{history}"),
             HumanMessagePromptTemplate.from_template("{input}")
         ])
