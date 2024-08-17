@@ -11,6 +11,7 @@ services:
       - "8888:8888" # for jupyter
       - "7860:7860" # for gradio
       - "8080:8080" # for fastapi
+    command: ["/root/.pyenv/versions/3.9.19/bin/python", "fast.py"]
     deploy:
       resources:
         reservations:
