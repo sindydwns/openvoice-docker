@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from pydantic import BaseModel
 import uvicorn
 
@@ -67,6 +67,26 @@ async def chat(data: ChatModel):
         res = summarize_chatbot.pred(data.text)
     return JSONResponse({"text": res})
 
+from uuid import uuid4
+from datetime import datetime
+
+class HostVoiceModel(BaseModel):
+    text: str
+
+def generate_random_name(ext=None):
+    path = datetime.now().strftime(f"v_%m%d_%H%M%S")
+    path += f"{str(uuid4()).split('-')[0]}"
+    if ext is not None:
+        path += f"{path}.{ext}"
+    return path
+
+@app.post("/hostvoice")
+async def hostvoice(data: HostVoiceModel):
+    audio1_path = "temp/" + generate_random_name("wav")
+    audio2_path = "temp/" + generate_random_name("wav")
+    voice_model.tts(data.text, audio1_path)
+    voice_model.tone_color(audio1_path, audio2_path)
+    return FileResponse(audio2_path, filename="output.wav", media_type="audio/wav")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
