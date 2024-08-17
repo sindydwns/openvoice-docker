@@ -10,6 +10,7 @@ services:
     ports:
       - "8888:8888" # for jupyter
       - "7860:7860" # for gradio
+      - "8080:8080" # for fastapi
     deploy:
       resources:
         reservations:

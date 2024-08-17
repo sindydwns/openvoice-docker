@@ -28,6 +28,11 @@ COPY install.sh .
 RUN chmod +x install.sh && /bin/sh install.sh
 ENV GRADIO_SERVER_NAME="0.0.0.0"
 
+RUN /root/.pyenv/versions/3.9.19/bin/pip install langchain langchain-community\
+    git+https://github.com/huggingface/transformers.git accelerate tiktoken moviepy
+
+RUN /root/.pyenv/versions/3.9.19/bin/pip install uvicorn fastapi
+
 WORKDIR /app/openvoice-repo
 
 CMD ["/usr/bin/dumb-init", "--", "sleep", "infinity"]
