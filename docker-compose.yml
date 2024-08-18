@@ -9,7 +9,6 @@ services:
       - ./openvoice-repo:/app/openvoice-repo
     ports:
       - "8888:8888" # for jupyter
-      - "7860:7860" # for gradio
       - "8080:8080" # for fastapi
     command: ["/root/.pyenv/versions/3.9.19/bin/uvicorn", "fast:app", "--port=8080", "--host=0.0.0.0", "--reload"]
     deploy:
@@ -19,12 +18,14 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  gradio:
+    build:
+      context: gradio-app
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860" # for gradio
+    command: ["/root/.pyenv/versions/3.9.19/bin/gradio", "app.py"]
 
 volumes:
   huggingface:
   nltk_data:
-    # name: repo
-    # driver_opts:
-    #   type: none
-    #   o: bind
-    #   device: /mnt/c/openvoice-docker/openvoice-repo
