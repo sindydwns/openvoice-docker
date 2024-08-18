@@ -72,9 +72,11 @@ from datetime import datetime
 
 class HostVoiceModel(BaseModel):
     text: str
+    use_openai: bool=False
+    speed: float=1.0
 
-def generate_random_name(ext=None):
-    path = datetime.now().strftime(f"v_%m%d_%H%M%S")
+def generate_random_name(version="", ext=None):
+    path = datetime.now().strftime(f"v_%m%d_%H%M%S_{version}")
     path += f"{str(uuid4()).split('-')[0]}"
     if ext is not None:
         path += f"{path}.{ext}"
@@ -82,9 +84,9 @@ def generate_random_name(ext=None):
 
 @app.post("/hostvoice")
 async def hostvoice(data: HostVoiceModel):
-    audio1_path = "temp/" + generate_random_name("wav")
-    audio2_path = "temp/" + generate_random_name("wav")
-    voice_model.tts(data.text, audio1_path)
+    audio1_path = "temp/" + generate_random_name("n_", "wav")
+    audio2_path = "temp/" + generate_random_name("c_", "wav")
+    voice_model.tts(data.text, audio1_path, use_openai=data.use_openai, speed=data.speed)
     voice_model.tone_color(audio1_path, audio2_path)
     return FileResponse(audio2_path, filename="output.wav", media_type="audio/wav")
 
