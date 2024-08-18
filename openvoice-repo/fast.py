@@ -7,7 +7,6 @@ from chatbot import RecommendChatbot, SummarizeChatbot
 from summarize import Summarizer
 import voice
 
-app = FastAPI()
 
 summarizer = Summarizer()
 tone_color_converter = voice.create_tone_color_converter("checkpoints_v2")
@@ -18,7 +17,7 @@ voice_model.load("checkpoints_v2/base_speakers/ses/kr.pth", "temp/pretrained.pth
 audio1_path = "temp/output_n.wav"
 audio2_path = "temp/output_c.wav"
 voice_model.tts("hello world hello world hello world hello world", audio1_path)
-voice_model.tone_color(audio1_path, audio2_path)
+# voice_model.tone_color(audio1_path, audio2_path)
 ##################
 
 file = open("temp/stt_file.txt", "r")
@@ -27,6 +26,8 @@ file.close()
 
 recommend_chatbot = RecommendChatbot(file_content)
 summarize_chatbot = SummarizeChatbot(file_content)
+
+app = FastAPI()
 
 @app.get("/")
 async def root():
