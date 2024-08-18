@@ -14,6 +14,13 @@ tone_color_converter = voice.create_tone_color_converter("checkpoints_v2")
 voice_model = voice.Model(tone_color_converter)
 voice_model.load("checkpoints_v2/base_speakers/ses/kr.pth", "temp/pretrained.pth")
 
+### audio test ###
+audio1_path = "temp/output_n.wav"
+audio2_path = "temp/output_c.wav"
+voice_model.tts("hello world", audio1_path)
+voice_model.tone_color(audio1_path, audio2_path)
+##################
+
 file = open("temp/stt_file.txt", "r")
 file_content = file.read()
 file.close()
