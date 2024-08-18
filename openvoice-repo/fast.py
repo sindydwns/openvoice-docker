@@ -17,7 +17,7 @@ voice_model.load("checkpoints_v2/base_speakers/ses/kr.pth", "temp/pretrained.pth
 ### audio test ###
 audio1_path = "temp/output_n.wav"
 audio2_path = "temp/output_c.wav"
-voice_model.tts("hello world", audio1_path)
+voice_model.tts("hello world hello world hello world hello world", audio1_path)
 voice_model.tone_color(audio1_path, audio2_path)
 ##################
 
