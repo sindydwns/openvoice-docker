@@ -37,7 +37,7 @@ async def summarize(data: SummarizeModel):
     res = summarizer.summarize_text(data.text)
     return JSONResponse(res)
 
-@app.get("/hightlight")
+@app.get("/highlight")
 async def hightlight():
     return JSONResponse({"data": [ 
         {"time": 32, "heart": 30, "chat_cnt":0},
